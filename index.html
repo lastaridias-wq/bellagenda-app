@@ -883,13 +883,26 @@ $('copyTplBtn').onclick = () => {
 $('waTplBtn').onclick = () => {
   const p = STATE.projects.find(x => x.id === $('tplProjectSelect').value);
   if(!p) return toast('Pilih project terlebih dahulu!');
-  
-  let waNum = p.waNumber ? p.waNumber.replace(/\D/g, '') : '';
-  if (waNum.startsWith('0')) waNum = '62' + waNum.substring(1);
+
+  // PERBAIKAN: Ubah paksa jadi String (teks) agar tidak error saat dibaca dari Google Sheets
+  let waNum = p.waNumber ? String(p.waNumber).replace(/\D/g, '') : '';
+
+  // Jika depannya 0 (cth: 0812), ganti jadi 62
+  if (waNum.startsWith('0')) {
+    waNum = '62' + waNum.substring(1);
+  } 
+  // Jika Sheets membuang angka 0 di depan (cth: 812), langsung tambah 62 di depannya
+  else if (waNum.startsWith('8')) {
+    waNum = '62' + waNum;
+  }
 
   const msgText = encodeURIComponent($('tplOutput').textContent);
-  if (waNum) window.open(`https://wa.me/${waNum}?text=${msgText}`, '_blank');
-  else window.open(`https://wa.me/?text=${msgText}`, '_blank');
+
+  if (waNum) {
+    window.open(`https://wa.me/${waNum}?text=${msgText}`, '_blank');
+  } else {
+    window.open(`https://wa.me/?text=${msgText}`, '_blank');
+  }
 };
 
 function renderLaporan() {
