@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Bellagenda - Asisten MUA Profesional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF6F2;
+    --surface: #FFFFFF;
+    --ink: #2C1E22;
+    --ink-soft: #6B5A5F;
+    --hairline: #EADFD9;
+    --rose: #9C5B6B;
+    --rose-tint: #F3E4E8;
+    --gold: #B98A3E;
+    --gold-tint: #F6ECD9;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', apple-system, sans-serif;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background-color: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; }
+  a { text-decoration: none; }
+  
+  /* Navbar */
+  header { padding: 24px; text-align: center; }
+  .brand-logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  
+  /* Hero Section */
+  .hero { text-align: center; padding: 48px 24px 64px; max-width: 700px; margin: 0 auto; }
+  .hero h1 { font-size: 42px; line-height: 1.15; margin-bottom: 16px; color: var(--ink); }
+  .hero p { font-size: 16px; color: var(--ink-soft); margin-bottom: 32px; max-width: 500px; margin-inline: auto; }
+  
+  .btn { display: inline-block; padding: 16px 32px; border-radius: 99px; font-weight: 700; font-size: 15px; transition: all 0.3s ease; }
+  .btn-primary { background: var(--ink); color: #fff; box-shadow: 0 8px 24px rgba(44,30,34,0.2); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(44,30,34,0.3); }
+  
+  .badge-free { display: inline-block; margin-top: 16px; font-size: 12.5px; font-weight: 600; color: var(--rose); background: var(--rose-tint); padding: 6px 14px; border-radius: 99px; }
+
+  /* Image Mockup Placeholder */
+  .mockup-container { max-width: 900px; margin: 0 auto; padding: 0 24px; transform: translateY(-30px); }
+  .mockup { background: var(--surface); border: 1px solid var(--hairline); border-radius: 24px; padding: 12px; box-shadow: 0 24px 48px rgba(44,30,34,0.08); text-align: center; position: relative; overflow: hidden; }
+  .mockup img { width: 100%; border-radius: 16px; display: block; background: #eee; min-height: 300px; object-fit: cover; }
+  
+  /* Features */
+  .features { padding: 64px 24px; background: var(--surface); text-align: center; }
+  .features h2 { font-size: 32px; margin-bottom: 48px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 900px; margin: 0 auto; }
+  @media(min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  .card { padding: 32px 24px; border-radius: 20px; border: 1px solid var(--hairline); background: var(--bg); transition: all 0.3s; }
+  .card:hover { border-color: var(--gold); background: var(--gold-tint); }
+  .card .icon { font-size: 32px; margin-bottom: 16px; display: inline-block; }
+  .card h3 { font-size: 20px; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--ink-soft); }
+
+  /* Pricing */
+  .pricing { padding: 80px 24px; text-align: center; max-width: 800px; margin: 0 auto; }
+  .pricing h2 { font-size: 32px; margin-bottom: 12px; }
+  .pricing-sub { color: var(--ink-soft); margin-bottom: 40px; font-size: 15px; }
+  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media(min-width: 600px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+  
+  .p-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 24px; padding: 40px 24px; text-align: left; }
+  .p-card.premium { border: 2px solid var(--gold); background: linear-gradient(180deg, var(--surface) 0%, var(--gold-tint) 100%); position: relative; }
+  .best-value { position: absolute; top: -12px; right: 24px; background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 99px; letter-spacing: 0.05em; }
+  
+  .p-card h3 { font-size: 22px; margin-bottom: 8px; }
+  .p-card .price { font-family: var(--font-display); font-size: 36px; color: var(--ink); font-weight: 700; margin-bottom: 24px; }
+  .p-card .price span { font-size: 16px; color: var(--ink-soft); font-family: var(--font-body); font-weight: 400; }
+  .p-list { list-style: none; margin-bottom: 32px; }
+  .p-list li { margin-bottom: 12px; font-size: 14.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 8px; }
+  .p-list li::before { content: '✓'; color: var(--sage); font-weight: bold; }
+
+  /* Footer */
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--hairline); color: var(--ink-soft); font-size: 13px; }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-logo">Bellagenda</div>
+  </header>
+
+  <section class="hero">
+    <h1>Manajemen Klien & Tagihan, Kini Secantik Hasil Makeup-mu.</h1>
+    <p>Tinggalkan buku catatan yang berantakan. Pantau jadwal, hitung profit bersih, dan kirim pengingat pelunasan otomatis ke klien agar bisnismu terlihat lebih profesional.</p>
+    <!-- Tautan ini mengarah ke file aplikasi Anda yang baru (app.html) -->
+    <a href="app.html" class="btn btn-primary">Mulai Gunakan Bellagenda</a><br>
+    <div class="badge-free">Akses 5 Project Pertama 100% Gratis</div>
+  </section>
+
+  <!-- MOCKUP GAMBAR -->
+  <!-- Nanti Anda bisa mengganti URL src gambar di bawah ini dengan screenshot aplikasi Anda -->
+  <div class="mockup-container">
+    <div class="mockup">
+      <div style="padding: 40px 20px; color:var(--ink-soft); font-size:14px; background:#f5ebe6; border-radius: 16px; border:1px dashed var(--rose);">
+        <em>(Tempatkan Screenshot Estetik Aplikasi Bellagenda di Sini)</em>
+      </div>
+    </div>
+  </div>
+
+  <section class="features">
+    <h2>Didesain Khusus untuk Workflow MUA</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="icon">✨</span>
+        <h3>Kirim Invoice Instan</h3>
+        <p>Tidak perlu ngetik manual. Buat tagihan DP atau pelunasan rapi yang langsung terhubung ke WhatsApp klien.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📅</span>
+        <h3>Pantau Jadwal</h3>
+        <p>Jatuh tempo pembayaran dan jadwal hari-H tersusun otomatis agar tidak ada jadwal yang bentrok.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📈</span>
+        <h3>Hitung Profit Bersih</h3>
+        <p>Pisahkan biaya asisten, transport, dan operasional untuk melihat margin keuntungan bersihmu secara *real-time*.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <h2>Investasi untuk Bisnis Profesional</h2>
+    <p class="pricing-sub">Mulai gratis untuk beradaptasi, upgrade kapan saja saat jadwalmu makin padat.</p>
+    
+    <div class="pricing-grid">
+      <div class="p-card">
+        <h3>Free Tester</h3>
+        <div class="price">Rp 0</div>
+        <ul class="p-list">
+          <li>Akses maksimal 5 Project</li>
+          <li>Fitur hitung profit & biaya</li>
+          <li>Otomatisasi Chat WA</li>
+          <li>Penyimpanan Aman (Google)</li>
+        </ul>
+        <a href="app.html" class="btn btn-outline" style="width: 100%; border: 1.5px solid var(--ink); color: var(--ink); display:block; text-align:center; border-radius:99px; padding:14px; font-weight:700;">Coba Sekarang</a>
+      </div>
+      
+      <div class="p-card premium">
+        <div class="best-value">MOST POPULAR</div>
+        <h3>Pro MUA</h3>
+        <div class="price">Rp 49.000 <span>/ bulan</span></div>
+        <ul class="p-list">
+          <li><strong>Unlimited Project Klien</strong></li>
+          <li>Akses fitur laporan rekap bulanan</li>
+          <li>Prioritas bantuan & support</li>
+          <li>Tersedia paket 3 Bulan & 1 Tahun</li>
+        </ul>
+        <!-- Arahkan ke WhatsApp Anda -->
+        <a href="https://wa.me/6285366331038?text=Halo%20min,%20saya%20mau%20tanya%20tentang%20paket%20Pro%20Bellagenda" class="btn btn-primary" style="width: 100%; display:block; text-align:center;">Konsultasi Upgrade</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Bellagenda. Asisten Pintar untuk MUA Indonesia.
+  </footer>
+
+</body>
+</html>
