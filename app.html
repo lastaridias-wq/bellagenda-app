@@ -982,6 +982,52 @@ $('searchInput').addEventListener('input', e => {
 $('todayPill').textContent = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
 renderChips(); 
 clearForm();
+
+  // --- FITUR AUTO LOGIN & LOGOUT ---
+
+// 1. Cek memori saat halaman pertama kali dibuka
+window.addEventListener('load', () => {
+  const savedUser = localStorage.getItem('bellagenda_user');
+  const savedPass = localStorage.getItem('bellagenda_pass');
+
+  // Jika ada data tersimpan, otomatis isi form dan klik login
+  if(savedUser && savedPass) {
+    $('loginUser').value = savedUser;
+    $('loginPass').value = savedPass;
+    $('loginBtn').click(); 
+  }
+});
+
+// 2. Simpan ke memori HANYA jika login sukses
+// (Tambahkan baris ini HANYA jika Anda ingin mengikatnya ke fungsi sukses login Anda)
+// Cara praktisnya: tempelkan kode ini di dalam blok fungsi saat data berhasill ditarik dari Google Script.
+function simpanSesiLokal(user, pass) {
+    localStorage.setItem('bellagenda_user', user);
+    localStorage.setItem('bellagenda_pass', pass);
+}
+
+// Modifikasi fungsi klik tombol Login Anda agar menyimpan memori
+const tombolLoginAsli = $('loginBtn').onclick;
+$('loginBtn').onclick = () => {
+    // Panggil fungsi login yang asli
+    tombolLoginAsli(); 
+
+    // Simpan ketikan mereka ke memori browser
+    const inputUser = $('loginUser').value;
+    const inputPass = $('loginPass').value;
+    if(inputUser && inputPass) {
+        simpanSesiLokal(inputUser, inputPass);
+    }
+};
+
+// 3. Fungsi untuk tombol Keluar (Logout)
+$('logoutBtn').onclick = () => {
+  // Hapus memori
+  localStorage.removeItem('bellagenda_user');
+  localStorage.removeItem('bellagenda_pass');
+  // Muat ulang halaman, akan kembali ke layar login
+  location.reload(); 
+};
 </script>
 </body>
 </html>
